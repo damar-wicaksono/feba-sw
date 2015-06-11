@@ -12,7 +12,7 @@
     ''' CI41, LRS/PSI, 2014
     ''' WD41, LRS/EPFL/PSI, 2015
     ''' </author>
-    Function leftPad(ByVal strBuffer As String,
+    Public Function leftPad(ByVal strBuffer As String,
                      ByVal l As Integer) As String
 
         Dim intCount As Integer
@@ -25,4 +25,6 @@
         Return leftPad
 
     End Function
+
+
 End Module
