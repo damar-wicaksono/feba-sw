@@ -1,0 +1,3 @@
+﻿Module FortranWriteM
+
+End Module
