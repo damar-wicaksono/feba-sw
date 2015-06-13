@@ -258,16 +258,26 @@ Module NumCrunchM
         Return dblDz
     End Function
 
+    ''' <summary>
+    ''' Create an array with cell-centered position on the Z-axis based on 
+    ''' array of edge positions
+    ''' </summary>
+    ''' <param name="dblEdgeZ">Array of edge positions</param>
+    ''' <returns>Array of cell-centered positions</returns>
+    ''' <author>WD41, LRS/EPFL/PSI, 2015</author>
     Public Function getCellCenteredZ(ByVal dblEdgeZ() As Double) As Double()
 
+        ' %-- Variable Declarations
         Dim dblCellCenteredZ() As Double
-        Dim i As Integer
         Dim dblDelt As Double
+        Dim i As Integer
+
         ReDim dblCellCenteredZ(UBound(dblEdgeZ) - 1)
 
+        ' %-- Create the array
         For i = LBound(dblCellCenteredZ) To UBound(dblCellCenteredZ)
-            dblDelt = dblEdgeZ(i + 1) - dblEdgeZ(i)
-            dblCellCenteredZ(i) = dblEdgeZ(i) + dblDelt / 2
+            dblDelt = (dblEdgeZ(i + 1) - dblEdgeZ(i)) / 2
+            dblCellCenteredZ(i) = dblEdgeZ(i) + dblDelt
         Next i
 
         Return dblCellCenteredZ
