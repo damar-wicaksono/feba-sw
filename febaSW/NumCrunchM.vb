@@ -56,7 +56,7 @@ Module NumCrunchM
         ReDim dblZ(UBound(dblCellEdgeConstraints) + 2)
 
         ' %-- Assign Cell-Edge Constraints
-        '     The cell-edge constraints is direct assignment ot the axial position
+        '     The cell-edge constraints is direct assignment at the axial position
         ' The first edge is the bottom of the components
         dblZ(0) = 0.0#
         ' The last edge is the height of the component
@@ -155,12 +155,12 @@ Module NumCrunchM
     End Function
 
     ''' <summary>
-    ''' 
+    ''' Create a refined discretization based on maximum cell size
     ''' </summary>
-    ''' <param name="dblEdgeZ"></param>
-    ''' <param name="dblCellCenteredConstraints"></param>
-    ''' <param name="dblSizeMax"></param>
-    ''' <returns></returns>
+    ''' <param name="dblEdgeZ">Array of edge positions</param>
+    ''' <param name="dblCellCenteredConstraints">Array of cell-centered constraints</param>
+    ''' <param name="dblSizeMax">The maximum cell size</param>
+    ''' <returns>Array of edge positions with each cell size smaller than dblSizeMax</returns>
     ''' <author>WD41, LRS/EPFL/PSI, 2015</author>
     Public Function refineDzbySize(ByVal dblEdgeZ() As Double, _
                                    ByVal dblCellCenteredConstraints() As Double, _
@@ -173,8 +173,8 @@ Module NumCrunchM
         Dim dblDz() As Double
         Dim intShift1 As Integer = 0    ' Index shift after insertion of new edge
         Dim intShift2 As Integer = 0    ' Index shift after node constraint was treated
-        Dim intNewSize As Integer = 0   ' Integer to check if refinement is required
-        Dim intOldSize As Integer = 0   ' Integer to check if refinement is required
+        Dim intNewSize As Integer       ' Integer to check if refinement is required
+        Dim intOldSize As Integer       ' Integer to check if refinement is required
         dblDz = discretizeZ(dblEdgeZ)
         intOldSize = 0
         intNewSize = UBound(dblDz)
@@ -192,7 +192,6 @@ Module NumCrunchM
 
                         If dblCellCenteredConstraints(j) > dblEdgeZ(i + intShift1) And dblCellCenteredConstraints(j) < dblEdgeZ(i + intShift1 + 1) Then
                             ' There is node constraint in this node, divide by 3
-                            'Debug.Print("Node constraint exists")
                             ' Increase edge array and shift up
                             ReDim Preserve dblEdgeZ(UBound(dblEdgeZ) + 2)
                             'For k = UBound(dblEdgeZ) To (i + intShift1 + 3) Step -1
@@ -221,7 +220,6 @@ Module NumCrunchM
                             'dblDelt = (dblEdgeZ(i + 1) - dblEdgeZ(i)) / 2
                             dblEdgeZ(i + intShift1 + 1) = dblEdgeZ(i + intShift1) + dblDz(i) / 2
                             intShift1 = intShift1 + 1
-                            'Debug.Print("No Constraint, new edge at " & dblEdgeZ(i + intShift1))
                             'For k = LBound(dblEdgeZ) To UBound(dblEdgeZ)
                             '    Debug.Print(dblEdgeZ(k))
                             'Next k
