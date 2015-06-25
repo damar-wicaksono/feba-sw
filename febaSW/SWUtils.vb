@@ -14,9 +14,9 @@ Module SWUtils
     ''' <remarks>
     ''' Taken from http://help.solidworks.com/2015/English/api/sldworksapi/Select_Bodies_Example_VB.htm
     ''' </remarks>
-    Public Sub selectSolidBodies(swApp As SldWorks.SldWorks, _
-                                 swModel As SldWorks.ModelDoc2, _
-                                 objBodies As Object)
+    Public Sub selectSolidBodies(ByRef swApp As SldWorks.SldWorks, _
+                                 ByRef swModel As SldWorks.ModelDoc2, _
+                                 ByRef objBodies As Object)
 
         ' %-- Variable declarations
         Dim swModExt As SldWorks.ModelDocExtension
@@ -52,7 +52,7 @@ Module SWUtils
                                          True, 2, Nothing, _
                                          swSelectOption_e.swSelectOptionDefault)
             End If
-            
+
         Next i
 
     End Sub
@@ -64,9 +64,9 @@ Module SWUtils
     ''' <param name="swModel">SolidWorks document</param>
     ''' <param name="objBodies">The list of bodies to be selected</param>
     ''' <author>WD41, LRS/EPFL/PSI, 2015</author>
-    Public Sub combineSolidBodies(swApp As SldWorks.SldWorks, _
-                                  swModel As SldWorks.ModelDoc2, _
-                                  objBodies As Object)
+    Public Sub combineSolidBodies(ByRef swApp As SldWorks.SldWorks, _
+                                  ByRef swModel As SldWorks.ModelDoc2, _
+                                  ByRef objBodies As Object)
 
         ' %-- Variable Declaration
         Dim swFeature As SldWorks.Feature
