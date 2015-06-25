@@ -57,4 +57,21 @@ Module SWUtils
 
     End Sub
 
+    Public Sub combineSolidBodies(swApp As SldWorks.SldWorks, _
+                                  swModel As SldWorks.ModelDoc2, _
+                                  objBodies As Object)
+
+        ' %-- Variable Declaration
+        Dim swFeature As SldWorks.Feature
+        Dim swFeatureMgr As SldWorks.FeatureManager
+
+        ' %-- Make selection of the input bodies
+        Call selectSolidBodies(swApp, swModel, objBodies)
+
+        ' %-- Create Combined Solid Body
+        swFeatureMgr = swModel.FeatureManager()
+        swFeature = swFeatureMgr.InsertCombineFeature(swBodyOperationType_e.SWBODYADD, _
+                                                      Nothing, Nothing)
+
+    End Sub
 End Module
