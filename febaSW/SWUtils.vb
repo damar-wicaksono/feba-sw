@@ -57,6 +57,13 @@ Module SWUtils
 
     End Sub
 
+    ''' <summary>
+    ''' Create combined bodies feature out of selected solid bodies
+    ''' </summary>
+    ''' <param name="swApp">SolidWorks application object</param>
+    ''' <param name="swModel">SolidWorks document</param>
+    ''' <param name="objBodies">The list of bodies to be selected</param>
+    ''' <author>WD41, LRS/EPFL/PSI, 2015</author>
     Public Sub combineSolidBodies(swApp As SldWorks.SldWorks, _
                                   swModel As SldWorks.ModelDoc2, _
                                   objBodies As Object)
