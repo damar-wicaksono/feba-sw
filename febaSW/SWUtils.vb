@@ -63,10 +63,12 @@ Module SWUtils
     ''' <param name="swApp">SolidWorks application object</param>
     ''' <param name="swModel">SolidWorks document</param>
     ''' <param name="objBodies">The list of bodies to be selected</param>
+    ''' <param name="strFeatureName">The name of the combined bodies</param>
     ''' <author>WD41, LRS/EPFL/PSI, 2015</author>
     Public Sub combineSolidBodies(ByRef swApp As SldWorks.SldWorks, _
                                   ByRef swModel As SldWorks.ModelDoc2, _
-                                  ByRef objBodies As Object)
+                                  ByRef objBodies As Object, _
+                                  ByVal strFeatureName As String)
 
         ' %-- Variable Declaration
         Dim swFeature As SldWorks.Feature
@@ -79,6 +81,7 @@ Module SWUtils
         swFeatureMgr = swModel.FeatureManager()
         swFeature = swFeatureMgr.InsertCombineFeature(swBodyOperationType_e.SWBODYADD, _
                                                       Nothing, Nothing)
+        swFeature.Name = strFeatureName
 
     End Sub
 End Module
