@@ -84,4 +84,40 @@ Module SWUtils
         swFeature.Name = strFeatureName
 
     End Sub
+
+    ''' <summary>
+    ''' Delete a body feature 
+    ''' </summary>
+    ''' <param name="swApp">SolidWorks application object</param>
+    ''' <param name="swModel">SolidWorks document object</param>
+    ''' <param name="strFeatureName">The name of the combine feature to be deleted</param>
+    ''' <remarks></remarks>
+    Public Sub deleteCombinedFeature(ByRef swApp As SldWorks.SldWorks, _
+                                     ByRef swModel As SldWorks.ModelDoc2, _
+                                     ByVal strFeatureName As String)
+
+        ' %-- Variable declarations
+        Dim swModExt As SldWorks.ModelDocExtension
+        Dim blRet As Boolean
+
+        Dim strBodyFeature As String = "BODYFEATURE"
+
+        swModExt = swModel.Extension()
+
+        ' %-- Select feature
+        swModel.ClearSelection2(True)
+        blRet = swModExt.SelectByID2(strFeatureName, strBodyFeature, _
+                                     0.0#, 0.0#, 0.0#, _
+                                     False, 0, Nothing, _
+                                     swSelectOption_e.swSelectOptionDefault)
+
+        If Not blRet Then
+            Exit Sub
+        Else
+            ' %-- Delete feature
+            swModel.EditDelete()
+        End If
+
+    End Sub
+
 End Module
